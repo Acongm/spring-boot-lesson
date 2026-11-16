@@ -1,3 +1,4 @@
+-- MySQL 容器首次初始化空数据卷时执行这份脚本。
 CREATE TABLE student (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,

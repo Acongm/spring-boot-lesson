@@ -13,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class LessonSecurity {
     @Bean
     SecurityFilterChain infoSecurity(HttpSecurity http) throws Exception {
+        // 此过滤链只匹配应用信息端点，匿名请求会收到 Basic 认证挑战。
         return http.securityMatcher(EndpointRequest.to(InfoEndpoint.class))
                 .authorizeHttpRequests(requests -> requests.anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())

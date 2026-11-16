@@ -5,8 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+// JPA 将 Student 映射到 student 表。
 @Entity
 public class Student {
+    // ID 是主键，INSERT 时由数据库生成。
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,6 +17,7 @@ public class Student {
     private String phone;
     private int age;
 
+    // JPA 读取数据库行时需要无参构造方法。
     protected Student() {
     }
 

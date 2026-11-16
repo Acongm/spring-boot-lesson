@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class StudentController {
     private final StudentRepository students;
 
+    // Spring 创建 Controller 时，通过构造器传入 Repository Bean。
     public StudentController(StudentRepository students) {
         this.students = students;
     }
@@ -26,6 +27,7 @@ public class StudentController {
 
     @GetMapping("/student/{id}")
     public Student get(@PathVariable long id) {
+        // 例如 /student/1 会把路径中的 1 绑定给 id。
         return findStudent(id);
     }
 
@@ -49,10 +51,12 @@ public class StudentController {
     }
 
     private Student findStudent(long id) {
+        // findById 没有查到记录时，在 HTTP 层返回 404。
         return students.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+    // POST 和 PUT 从请求体读取可编辑字段，记录的 ID 由路径或数据库决定。
     public record StudentInput(String name, String phone, int age) {
     }
 }

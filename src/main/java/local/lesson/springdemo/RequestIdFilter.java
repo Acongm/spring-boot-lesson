@@ -20,6 +20,7 @@ public class RequestIdFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
+        // 在 MVC 处理请求前写入响应头，curl -i 可以看到这个 ID。
         response.setHeader("X-Request-ID", UUID.randomUUID().toString());
         chain.doFilter(request, response);
     }
